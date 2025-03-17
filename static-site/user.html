@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 无人机产业平台</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #1890ff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            background-color: #001529;
+            padding: 10px 0;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+        .menu a:hover, .menu a.active {
+            background-color: #1890ff;
+            border-radius: 4px;
+        }
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        .main-content {
+            flex: 1;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #1890ff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+        .user-info h2 {
+            margin: 0 0 5px 0;
+        }
+        .user-info p {
+            margin: 0;
+            color: #666;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        .sidebar-menu a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: #e6f7ff;
+            color: #1890ff;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .item {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .item-title {
+            font-weight: bold;
+        }
+        .item-status {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        .status-completed {
+            background-color: #52c41a;
+            color: white;
+        }
+        .status-pending {
+            background-color: #faad14;
+            color: white;
+        }
+        .status-cancelled {
+            background-color: #f5222d;
+            color: white;
+        }
+        .item-details {
+            color: #666;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            background-color: #1890ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #40a9ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>无人机产业平台</h1>
+        <p>一站式无人机行业服务平台</p>
+    </header>
+    
+    <div class="menu">
+        <a href="index.html">首页</a>
+        <a href="jobs.html">无人机招聘</a>
+        <a href="tasks.html">运输任务</a>
+        <a href="training.html">培训机构</a>
+        <a href="booking.html">低空载客</a>
+        <a href="marketplace.html">无人机商城</a>
+        <a href="user.html" class="active">个人中心</a>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar card">
+            <div class="profile-header">
+                <div class="avatar">张</div>
+                <div class="user-info">
+                    <h2>张三</h2>
+                    <p>无人机爱好者</p>
+                </div>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active">我的订单</a></li>
+                <li><a href="#">我的任务</a></li>
+                <li><a href="#">我的课程</a></li>
+                <li><a href="#">我的航班</a></li>
+                <li><a href="#">我的收藏</a></li>
+                <li><a href="#">账户设置</a></li>
+                <li><a href="#">消息中心</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <div class="card">
+                <div class="section">
+                    <h3 class="section-title">我的订单</h3>
+                    <ul class="item-list">
+                        <li class="item">
+                            <div class="item-header">
+                                <div class="item-title">DJI Mini 3 Pro</div>
+                                <div class="item-status status-completed">已完成</div>
+                            </div>
+                            <div class="item-details">
+                                <p>订单号: 2023112501</p>
+                                <p>下单时间: 2023-11-25</p>
+                                <p>金额: ¥4,788</p>
+                            </div>
+                        </li>
+                        
+                        <li class="item">
+                            <div class="item-header">
+                                <div class="item-title">DJI Mini 3 Pro 智能飞行电池</div>
+                                <div class="item-status status-pending">待发货</div>
+                            </div>
+                            <div class="item-details">
+                                <p>订单号: 2023120101</p>
+                                <p>下单时间: 2023-12-01</p>
+                                <p>金额: ¥499</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="section-title">我的任务</h3>
+                    <ul class="item-list">
+                        <li class="item">
+                            <div class="item-header">
+                                <div class="item-title">城市建筑群航拍</div>
+                                <div class="item-status status-completed">已完成</div>
+                            </div>
+                            <div class="item-details">
+                                <p>任务编号: T2023110501</p>
+                                <p>完成时间: 2023-11-10</p>
+                                <p>报酬: ¥2,000</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="section-title">我的航班</h3>
+                    <ul class="item-list">
+                        <li class="item">
+                            <div class="item-header">
+                                <div class="item-title">北京市中心 → 怀柔区</div>
+                                <div class="item-status status-pending">待出行</div>
+                            </div>
+                            <div class="item-details">
+                                <p>预订编号: B2023121501</p>
+                                <p>出行日期: 2023-12-15</p>
+                                <p>乘客: 2人</p>
+                                <p>金额: ¥2,400</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="section">
+                    <h3 class="section-title">账户设置</h3>
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" id="username" value="张三">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" value="zhangsan@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">手机号</label>
+                        <input type="tel" id="phone" value="138****1234">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">地址</label>
+                        <textarea id="address" rows="3">北京市海淀区中关村大街1号</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="button">保存修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

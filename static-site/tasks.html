@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运输任务 - 无人机产业平台</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #1890ff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            background-color: #001529;
+            padding: 10px 0;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+        .menu a:hover, .menu a.active {
+            background-color: #1890ff;
+            border-radius: 4px;
+        }
+        .task-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .task-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: white;
+        }
+        .task-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .task-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .task-price {
+            color: #f5222d;
+            font-weight: bold;
+        }
+        .task-location {
+            color: #888;
+            font-size: 14px;
+        }
+        .task-deadline {
+            color: #1890ff;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>无人机产业平台</h1>
+        <p>一站式无人机行业服务平台</p>
+    </header>
+    
+    <div class="menu">
+        <a href="index.html">首页</a>
+        <a href="jobs.html">无人机招聘</a>
+        <a href="tasks.html" class="active">运输任务</a>
+        <a href="training.html">培训机构</a>
+        <a href="booking.html">低空载客</a>
+        <a href="marketplace.html">无人机商城</a>
+        <a href="user.html">个人中心</a>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h2>运输任务</h2>
+            <p>浏览最新的无人机运输任务，接单赚取收益。</p>
+            
+            <div class="task-list">
+                <div class="task-card">
+                    <div class="task-title">紧急药品配送</div>
+                    <div class="task-description">需要将医疗物资从市中心医院配送到郊区诊所</div>
+                    <div class="task-price">¥500/次</div>
+                    <div class="task-location">北京市海淀区</div>
+                    <div class="task-deadline">截止日期: 2025-03-20</div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-title">农田监测任务</div>
+                    <div class="task-description">对100亩农田进行定期监测，收集生长数据</div>
+                    <div class="task-price">¥2,000/周</div>
+                    <div class="task-location">河南省郑州市</div>
+                    <div class="task-deadline">截止日期: 2025-03-25</div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-title">快递包裹配送</div>
+                    <div class="task-description">负责城市内小型包裹的快速配送服务</div>
+                    <div class="task-price">¥50/件</div>
+                    <div class="task-location">上海市浦东新区</div>
+                    <div class="task-deadline">截止日期: 2025-03-18</div>
+                </div>
+                
+                <div class="task-card">
+                    <div class="task-title">电力线路巡检</div>
+                    <div class="task-description">对山区电力线路进行定期巡检，拍摄高清图像</div>
+                    <div class="task-price">¥3,000/次</div>
+                    <div class="task-location">四川省成都市</div>
+                    <div class="task-deadline">截止日期: 2025-03-30</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

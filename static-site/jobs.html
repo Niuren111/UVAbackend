@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无人机招聘 - 无人机产业平台</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #1890ff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            background-color: #001529;
+            padding: 10px 0;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+        .menu a:hover, .menu a.active {
+            background-color: #1890ff;
+            border-radius: 4px;
+        }
+        .job-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .job-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: white;
+        }
+        .job-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .job-company {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .job-salary {
+            color: #f5222d;
+            font-weight: bold;
+        }
+        .job-location {
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>无人机产业平台</h1>
+        <p>一站式无人机行业服务平台</p>
+    </header>
+    
+    <div class="menu">
+        <a href="index.html">首页</a>
+        <a href="jobs.html" class="active">无人机招聘</a>
+        <a href="tasks.html">运输任务</a>
+        <a href="training.html">培训机构</a>
+        <a href="booking.html">低空载客</a>
+        <a href="marketplace.html">无人机商城</a>
+        <a href="user.html">个人中心</a>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h2>无人机招聘</h2>
+            <p>浏览最新的无人机行业职位，找到适合您的工作机会。</p>
+            
+            <div class="job-list">
+                <div class="job-card">
+                    <div class="job-title">无人机飞手</div>
+                    <div class="job-company">大疆创新科技有限公司</div>
+                    <div class="job-salary">¥8,000 - 12,000/月</div>
+                    <div class="job-location">深圳市</div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-title">无人机维修工程师</div>
+                    <div class="job-company">极飞科技</div>
+                    <div class="job-salary">¥10,000 - 15,000/月</div>
+                    <div class="job-location">广州市</div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-title">无人机测试员</div>
+                    <div class="job-company">亿航智能</div>
+                    <div class="job-salary">¥7,000 - 10,000/月</div>
+                    <div class="job-location">上海市</div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-title">无人机航拍师</div>
+                    <div class="job-company">航拍中国</div>
+                    <div class="job-salary">¥12,000 - 18,000/月</div>
+                    <div class="job-location">北京市</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
