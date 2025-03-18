@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/drone_home?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+    networks:
+      - drone-network
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=drone_home
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - drone-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./dist:/usr/share/nginx/html
+    depends_on:
+      - app
+    networks:
+      - drone-network
+
+networks:
+  drone-network:
+    driver: bridge
+
+volumes:
+  db-data: 

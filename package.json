@@ -6,11 +6,19 @@
   "homepage": "https://niuren111.github.io/UAV/",
   "scripts": {
     "dev": "vite",
+    "dev:admin": "vite --config vite.admin.config.ts",
     "build": "vite build",
+    "build:admin": "vite build --config vite.admin.config.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
+    "preview:admin": "vite preview --config vite.admin.config.ts",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "predeploy:admin": "npm run build:admin",
+    "deploy:admin": "gh-pages -d dist-admin -r https://github.com/niuren111/UVAbackend.git -b gh-pages",
+    "deploy-admin": "node deploy-admin.js",
+    "deploy-simple": "node deploy-simple.js",
+    "deploy-fixed": "node deploy-fixed-admin.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.0",

@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>无人机行业平台管理后台</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+    }
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #001529;
+      color: white;
+      padding-top: 20px;
+    }
+    .sidebar-header {
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid #003a70;
+    }
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu-item {
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .menu-item:hover, .menu-item.active {
+      background-color: #1890ff;
+    }
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+    .header {
+      background-color: white;
+      padding: 16px 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .content {
+      background-color: white;
+      margin-top: 20px;
+      padding: 24px;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #1890ff;
+      margin-top: 0;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .table th, .table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .table th {
+      background-color: #f2f2f2;
+    }
+    .table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .button {
+      background-color: #1890ff;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .button-danger {
+      background-color: #ff4d4f;
+    }
+    .button-default {
+      background-color: #f0f0f0;
+      color: rgba(0, 0, 0, 0.85);
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .card {
+      background-color: white;
+      padding: 16px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: calc(25% - 16px);
+      min-width: 250px;
+    }
+    .card-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .card-value {
+      font-size: 24px;
+      color: #1890ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>管理后台</h2>
+      </div>
+      <ul class="menu">
+        <li class="menu-item active" data-page="dashboard">仪表盘</li>
+        <li class="menu-item" data-page="passengers">低空旅客服务</li>
+        <li class="menu-item" data-page="products">商品管理</li>
+        <li class="menu-item" data-page="users">用户管理</li>
+        <li class="menu-item" data-page="orders">订单管理</li>
+        <li class="menu-item" data-page="recruitment">招聘管理</li>
+        <li class="menu-item" data-page="transport">运输管理</li>
+        <li class="menu-item" data-page="training">培训管理</li>
+        <li class="menu-item" data-page="settings">系统设置</li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="header">
+        <h1>无人机行业平台管理后台</h1>
+        <span>管理员：admin</span>
+      </div>
+      
+      <!-- 仪表盘页面 -->
+      <div id="dashboard" class="content page active">
+        <h2>仪表盘</h2>
+        <div class="card-container">
+          <div class="card">
+            <div class="card-title">用户总数</div>
+            <div class="card-value">128</div>
+          </div>
+          <div class="card">
+            <div class="card-title">订单总数</div>
+            <div class="card-value">85</div>
+          </div>
+          <div class="card">
+            <div class="card-title">商品总数</div>
+            <div class="card-value">36</div>
+          </div>
+          <div class="card">
+            <div class="card-title">低空旅客服务</div>
+            <div class="card-value">12</div>
+          </div>
+        </div>
+        <h3 style="margin-top: 24px;">最近订单</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>订单ID</th>
+              <th>用户</th>
+              <th>商品</th>
+              <th>金额</th>
+              <th>状态</th>
+              <th>时间</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2023080001</td>
+              <td>张三</td>
+              <td>北京城区观光航线</td>
+              <td>¥599</td>
+              <td>已完成</td>
+              <td>2023-08-01 14:30</td>
+            </tr>
+            <tr>
+              <td>2023080002</td>
+              <td>李四</td>
+              <td>长城航空观光</td>
+              <td>¥899</td>
+              <td>已支付</td>
+              <td>2023-08-02 09:15</td>
+            </tr>
+            <tr>
+              <td>2023080003</td>
+              <td>王五</td>
+              <td>专业无人机模型</td>
+              <td>¥2999</td>
+              <td>待发货</td>
+              <td>2023-08-03 16:42</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 低空旅客服务页面 -->
+      <div id="passengers" class="content page">
+        <h2>低空旅客服务管理</h2>
+        <button class="button" id="add-passenger">添加低空旅客服务</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>标题</th>
+              <th>出发地点</th>
+              <th>目的地点</th>
+              <th>容量</th>
+              <th>价格</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>北京城区观光航线</td>
+              <td>北京市海淀区起飞点</td>
+              <td>北京市海淀区降落点</td>
+              <td>2/4</td>
+              <td>¥599</td>
+              <td>已上架</td>
+              <td>
+                <button class="button button-default">编辑</button>
+                <button class="button button-danger">删除</button>
+                <button class="button button-default">下架</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>长城航空观光</td>
+              <td>北京市延庆区起飞点</td>
+              <td>北京市延庆区降落点</td>
+              <td>0/4</td>
+              <td>¥899</td>
+              <td>已上架</td>
+              <td>
+                <button class="button button-default">编辑</button>
+                <button class="button button-danger">删除</button>
+                <button class="button button-default">下架</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>故宫博物院上空观光</td>
+              <td>北京市东城区起飞点</td>
+              <td>北京市东城区降落点</td>
+              <td>1/6</td>
+              <td>¥1299</td>
+              <td>待上架</td>
+              <td>
+                <button class="button button-default">编辑</button>
+                <button class="button button-danger">删除</button>
+                <button class="button">上架</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 商品管理页面 -->
+      <div id="products" class="content page">
+        <h2>商品管理</h2>
+        <button class="button" id="add-product">添加商品</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>商品名称</th>
+              <th>分类</th>
+              <th>价格</th>
+              <th>库存</th>
+              <th>销量</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>专业航拍无人机</td>
+              <td>无人机设备</td>
+              <td>¥3999</td>
+              <td>25</td>
+              <td>58</td>
+              <td>在售</td>
+              <td>
+                <button class="button button-default">编辑</button>
+                <button class="button button-danger">删除</button>
+                <button class="button button-default">下架</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>入门级航拍无人机</td>
+              <td>无人机设备</td>
+              <td>¥999</td>
+              <td>42</td>
+              <td>126</td>
+              <td>在售</td>
+              <td>
+                <button class="button button-default">编辑</button>
+                <button class="button button-danger">删除</button>
+                <button class="button button-default">下架</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>无人机电池配件</td>
+              <td>配件</td>
+              <td>¥299</td>
+              <td>86</td>
+              <td>210</td>
+              <td>在售</td>
+              <td>
+                <button class="button button-default">编辑</button>
+                <button class="button button-danger">删除</button>
+                <button class="button button-default">下架</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 用户管理页面 -->
+      <div id="users" class="content page">
+        <h2>用户管理</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>用户名</th>
+              <th>手机号</th>
+              <th>注册时间</th>
+              <th>最后登录</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>张三</td>
+              <td>138****1234</td>
+              <td>2023-01-15</td>
+              <td>2023-08-05</td>
+              <td>正常</td>
+              <td>
+                <button class="button button-default">查看详情</button>
+                <button class="button button-danger">禁用</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>李四</td>
+              <td>139****5678</td>
+              <td>2023-02-20</td>
+              <td>2023-08-04</td>
+              <td>正常</td>
+              <td>
+                <button class="button button-default">查看详情</button>
+                <button class="button button-danger">禁用</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>王五</td>
+              <td>137****9012</td>
+              <td>2023-03-10</td>
+              <td>2023-08-01</td>
+              <td>正常</td>
+              <td>
+                <button class="button button-default">查看详情</button>
+                <button class="button button-danger">禁用</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 订单管理页面 -->
+      <div id="orders" class="content page">
+        <h2>订单管理</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>订单ID</th>
+              <th>用户</th>
+              <th>商品</th>
+              <th>金额</th>
+              <th>支付方式</th>
+              <th>订单状态</th>
+              <th>下单时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2023080001</td>
+              <td>张三</td>
+              <td>北京城区观光航线</td>
+              <td>¥599</td>
+              <td>微信支付</td>
+              <td>已完成</td>
+              <td>2023-08-01 14:30</td>
+              <td>
+                <button class="button button-default">查看详情</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2023080002</td>
+              <td>李四</td>
+              <td>长城航空观光</td>
+              <td>¥899</td>
+              <td>支付宝</td>
+              <td>已支付</td>
+              <td>2023-08-02 09:15</td>
+              <td>
+                <button class="button button-default">查看详情</button>
+                <button class="button">确认完成</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2023080003</td>
+              <td>王五</td>
+              <td>专业无人机模型</td>
+              <td>¥2999</td>
+              <td>银行卡</td>
+              <td>待发货</td>
+              <td>2023-08-03 16:42</td>
+              <td>
+                <button class="button button-default">查看详情</button>
+                <button class="button">发货</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 系统设置页面 -->
+      <div id="settings" class="content page">
+        <h2>系统设置</h2>
+        <form id="settings-form">
+          <div class="form-group">
+            <label for="site-name">网站名称</label>
+            <input type="text" id="site-name" class="form-control" value="无人机行业平台">
+          </div>
+          <div class="form-group">
+            <label for="site-description">网站描述</label>
+            <textarea id="site-description" class="form-control" rows="3">无人机行业专业服务平台，提供低空旅客服务、无人机产品销售、培训机构等服务。</textarea>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">联系邮箱</label>
+            <input type="email" id="contact-email" class="form-control" value="contact@example.com">
+          </div>
+          <div class="form-group">
+            <label for="contact-phone">联系电话</label>
+            <input type="text" id="contact-phone" class="form-control" value="400-123-4567">
+          </div>
+          <button type="button" class="button" id="save-settings">保存设置</button>
+        </form>
+      </div>
+      
+      <!-- 招聘管理页面 -->
+      <div id="recruitment" class="content page">
+        <h2>招聘管理</h2>
+        <button class="button" id="add-job">添加招聘信息</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>职位名称</th>
+              <th>部门</th>
+              <th>工作地点</th>
+              <th>薪资范围</th>
+              <th>发布时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>无人机飞行员</td>
+              <td>运营部</td>
+              <td>北京</td>
+              <td>8000-12000</td>
+              <td>2023-07-15</td>
+              <td>招聘中</td>
+              <td>
+                <button class="button button-default" data-id="1" data-action="edit">编辑</button>
+                <button class="button button-danger" data-id="1" data-action="delete">删除</button>
+                <button class="button button-default" data-id="1" data-action="updateStatus">结束招聘</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>无人机维修工程师</td>
+              <td>技术部</td>
+              <td>上海</td>
+              <td>10000-15000</td>
+              <td>2023-07-20</td>
+              <td>招聘中</td>
+              <td>
+                <button class="button button-default" data-id="2" data-action="edit">编辑</button>
+                <button class="button button-danger" data-id="2" data-action="delete">删除</button>
+                <button class="button button-default" data-id="2" data-action="updateStatus">结束招聘</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>市场推广专员</td>
+              <td>市场部</td>
+              <td>广州</td>
+              <td>7000-10000</td>
+              <td>2023-08-01</td>
+              <td>招聘中</td>
+              <td>
+                <button class="button button-default" data-id="3" data-action="edit">编辑</button>
+                <button class="button button-danger" data-id="3" data-action="delete">删除</button>
+                <button class="button button-default" data-id="3" data-action="updateStatus">结束招聘</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 运输管理页面 -->
+      <div id="transport" class="content page">
+        <h2>运输管理</h2>
+        <button class="button" id="add-transport">添加运输任务</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>任务编号</th>
+              <th>货物类型</th>
+              <th>起始位置</th>
+              <th>目的地</th>
+              <th>重量(kg)</th>
+              <th>预计送达时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>T20230801001</td>
+              <td>医疗物资</td>
+              <td>北京市朝阳区医疗中心</td>
+              <td>北京市海淀区医院</td>
+              <td>5.2</td>
+              <td>2023-08-01 14:30</td>
+              <td>已完成</td>
+              <td>
+                <button class="button button-default" data-id="1" data-action="view">查看详情</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>T20230802001</td>
+              <td>快递包裹</td>
+              <td>北京市海淀区物流中心</td>
+              <td>北京市西城区社区</td>
+              <td>3.8</td>
+              <td>2023-08-02 16:00</td>
+              <td>运输中</td>
+              <td>
+                <button class="button button-default" data-id="2" data-action="view">查看详情</button>
+                <button class="button" data-id="2" data-action="complete">标记完成</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>T20230803001</td>
+              <td>农产品</td>
+              <td>北京市昌平区农场</td>
+              <td>北京市朝阳区超市</td>
+              <td>8.5</td>
+              <td>2023-08-03 09:00</td>
+              <td>待起飞</td>
+              <td>
+                <button class="button button-default" data-id="3" data-action="view">查看详情</button>
+                <button class="button" data-id="3" data-action="start">开始运输</button>
+                <button class="button button-danger" data-id="3" data-action="cancel">取消任务</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 培训管理页面 -->
+      <div id="training" class="content page">
+        <h2>培训管理</h2>
+        <button class="button" id="add-training">添加培训课程</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>课程名称</th>
+              <th>培训类型</th>
+              <th>培训地点</th>
+              <th>开始日期</th>
+              <th>结束日期</th>
+              <th>价格</th>
+              <th>报名人数</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>无人机基础飞行培训</td>
+              <td>初级培训</td>
+              <td>北京市海淀区培训中心</td>
+              <td>2023-08-10</td>
+              <td>2023-08-15</td>
+              <td>¥1999</td>
+              <td>8/20</td>
+              <td>报名中</td>
+              <td>
+                <button class="button button-default" data-id="1" data-action="edit">编辑</button>
+                <button class="button button-danger" data-id="1" data-action="delete">删除</button>
+                <button class="button button-default" data-id="1" data-action="updateStatus">结束报名</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>无人机航拍技术进阶</td>
+              <td>中级培训</td>
+              <td>上海市浦东新区培训基地</td>
+              <td>2023-08-20</td>
+              <td>2023-08-25</td>
+              <td>¥2999</td>
+              <td>5/15</td>
+              <td>报名中</td>
+              <td>
+                <button class="button button-default" data-id="2" data-action="edit">编辑</button>
+                <button class="button button-danger" data-id="2" data-action="delete">删除</button>
+                <button class="button button-default" data-id="2" data-action="updateStatus">结束报名</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>无人机竞速赛培训</td>
+              <td>高级培训</td>
+              <td>广州市天河区训练场</td>
+              <td>2023-09-01</td>
+              <td>2023-09-10</td>
+              <td>¥3999</td>
+              <td>3/10</td>
+              <td>报名中</td>
+              <td>
+                <button class="button button-default" data-id="3" data-action="edit">编辑</button>
+                <button class="button button-danger" data-id="3" data-action="delete">删除</button>
+                <button class="button button-default" data-id="3" data-action="updateStatus">结束报名</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入API交互层，确保在所有脚本之前加载 -->
+  <script>
+    // API模拟对象，当实际API.js未能加载时使用
+    const API = {
+      statistics: {
+        getDashboardData: () => {
+          return {
+            userCount: 128,
+            orderCount: 85,
+            productCount: 36,
+            passengerCount: 12,
+            recentOrders: [
+              {id: '2023080001', userName: '张三', productName: '北京城区观光航线', amount: '599', status: '已完成', createTime: '2023-08-01 14:30'},
+              {id: '2023080002', userName: '李四', productName: '长城航空观光', amount: '899', status: '已支付', createTime: '2023-08-02 09:15'},
+              {id: '2023080003', userName: '王五', productName: '专业无人机模型', amount: '2999', status: '待发货', createTime: '2023-08-03 16:42'}
+            ]
+          };
+        }
+      },
+      passengers: {
+        getAll: () => {
+          return {
+            records: [
+              {id: 1, title: '北京城区观光航线', departureLocation: '北京市海淀区起飞点', destinationLocation: '北京市海淀区降落点', bookedCount: 2, passengerCapacity: 4, price: 599, status: 1},
+              {id: 2, title: '长城航空观光', departureLocation: '北京市延庆区起飞点', destinationLocation: '北京市延庆区降落点', bookedCount: 0, passengerCapacity: 4, price: 899, status: 1},
+              {id: 3, title: '故宫博物院上空观光', departureLocation: '北京市东城区起飞点', destinationLocation: '北京市东城区降落点', bookedCount: 1, passengerCapacity: 6, price: 1299, status: 0}
+            ]
+          };
+        },
+        getById: (id) => {
+          return {id: id, title: '北京城区观光航线', departureLocation: '北京市海淀区起飞点', destinationLocation: '北京市海淀区降落点', bookedCount: 2, passengerCapacity: 4, price: 599, status: 1};
+        },
+        delete: () => {},
+        updateStatus: () => {},
+        update: () => {},
+        create: () => {}
+      },
+      products: {
+        getAll: () => {
+          return {
+            records: [
+              {id: 1, name: '专业航拍无人机', category: '无人机设备', price: 3999, stock: 25, sales: 58, status: 1},
+              {id: 2, name: '入门级航拍无人机', category: '无人机设备', price: 999, stock: 42, sales: 126, status: 1},
+              {id: 3, name: '无人机电池配件', category: '配件', price: 299, stock: 86, sales: 210, status: 1}
+            ]
+          };
+        },
+        getById: () => {},
+        delete: () => {},
+        updateStatus: () => {}
+      },
+      users: {
+        getAll: () => {
+          return {
+            records: [
+              {id: 1, username: '张三', phone: '138****1234', registerTime: '2023-01-15', lastLoginTime: '2023-08-05', status: 1},
+              {id: 2, username: '李四', phone: '139****5678', registerTime: '2023-02-20', lastLoginTime: '2023-08-04', status: 1},
+              {id: 3, username: '王五', phone: '137****9012', registerTime: '2023-03-10', lastLoginTime: '2023-08-01', status: 1}
+            ]
+          };
+        },
+        updateStatus: () => {}
+      },
+      orders: {
+        getAll: () => {
+          return {
+            records: [
+              {id: '2023080001', username: '张三', productName: '北京城区观光航线', amount: 599, payMethod: '微信支付', status: 3, createTime: '2023-08-01 14:30'},
+              {id: '2023080002', username: '李四', productName: '长城航空观光', amount: 899, payMethod: '支付宝', status: 2, createTime: '2023-08-02 09:15'},
+              {id: '2023080003', username: '王五', productName: '专业无人机模型', amount: 2999, payMethod: '银行卡', status: 1, createTime: '2023-08-03 16:42'}
+            ]
+          };
+        },
+        updateStatus: () => {}
+      },
+      settings: {
+        get: () => {
+          return {
+            siteName: '无人机行业平台',
+            siteDescription: '无人机行业专业服务平台，提供低空旅客服务、无人机产品销售、培训机构等服务。',
+            contactEmail: 'contact@example.com',
+            contactPhone: '400-123-4567'
+          };
+        },
+        update: () => {}
+      }
+    };
+  </script>
+
+  <!-- 如果有外部api.js文件，可以在这里尝试加载 -->
+  <script>
+    // 尝试加载外部API.js文件
+    function loadExternalAPI() {
+      const script = document.createElement('script');
+      script.src = './api.js';
+      script.onerror = () => {
+        console.log('无法加载API.js文件，使用内置模拟API');
+      };
+      document.body.appendChild(script);
+    }
+    
+    // 尝试加载外部API
+    // loadExternalAPI();
+  </script>
+  
+  <script>
+    // 页面切换功能
+    document.addEventListener('DOMContentLoaded', async function() {
+      const menuItems = document.querySelectorAll('.menu-item');
+      
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // 移除所有菜单项的active类
+          menuItems.forEach(mi => mi.classList.remove('active'));
+          // 给当前点击的菜单项添加active类
+          this.classList.add('active');
+          
+          // 获取要显示的页面ID
+          const pageId = this.getAttribute('data-page');
+          
+          // 隐藏所有页面
+          document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+          });
+          
+          // 显示目标页面
+          document.getElementById(pageId).classList.add('active');
+          
+          // 加载对应页面的数据
+          loadPageData(pageId);
+        });
+      });
+      
+      // 初始加载仪表盘数据
+      await loadPageData('dashboard');
+      
+      // 设置按钮事件处理
+      setupButtonEvents();
+    });
+    
+    // 根据页面ID加载相应的数据
+    async function loadPageData(pageId) {
+      try {
+        switch(pageId) {
+          case 'dashboard':
+            await loadDashboardData();
+            break;
+          case 'passengers':
+            await loadPassengersData();
+            break;
+          case 'products':
+            await loadProductsData();
+            break;
+          case 'users':
+            await loadUsersData();
+            break;
+          case 'orders':
+            await loadOrdersData();
+            break;
+          case 'recruitment':
+            await loadRecruitmentData();
+            break;
+          case 'transport':
+            await loadTransportData();
+            break;
+          case 'training':
+            await loadTrainingData();
+            break;
+          case 'settings':
+            await loadSettingsData();
+            break;
+        }
+      } catch (error) {
+        console.error(`加载${pageId}页面数据失败:`, error);
+        alert(`加载数据失败: ${error.message || '服务器连接错误'}`);
+      }
+    }
+    
+    // 加载仪表盘数据
+    async function loadDashboardData() {
+      try {
+        // 从API获取数据
+        const response = await API.statistics.getDashboardData();
+        const data = response.data || response;
+        
+        // 更新卡片数据
+        document.querySelector('#dashboard .card:nth-child(1) .card-value').textContent = data.userCount;
+        document.querySelector('#dashboard .card:nth-child(2) .card-value').textContent = data.orderCount;
+        document.querySelector('#dashboard .card:nth-child(3) .card-value').textContent = data.productCount;
+        document.querySelector('#dashboard .card:nth-child(4) .card-value').textContent = data.passengerCount;
+        
+        // 清空订单表格
+        const tbody = document.querySelector('#dashboard .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充订单数据
+        data.recentOrders.forEach(order => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.userName}</td>
+            <td>${order.productName}</td>
+            <td>¥${order.amount}</td>
+            <td>${order.status}</td>
+            <td>${order.createTime}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (error) {
+        console.error('加载仪表盘数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 加载低空旅客服务数据
+    async function loadPassengersData() {
+      try {
+        // 从API获取数据
+        const response = await API.passengers.getAll({page: 1, size: 10});
+        const data = response.data || response;
+        
+        // 清空表格
+        const tbody = document.querySelector('#passengers .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充数据
+        data.records.forEach(passenger => {
+          const tr = document.createElement('tr');
+          
+          // 根据状态确定操作按钮
+          let statusButtons = '';
+          if (passenger.status === 0) {
+            statusButtons = '<button class="button" data-action="updateStatus" data-status="1">上架</button>';
+          } else if (passenger.status === 1) {
+            statusButtons = '<button class="button button-default" data-action="updateStatus" data-status="2">下架</button>';
+          } else {
+            statusButtons = '<button class="button" data-action="updateStatus" data-status="0">设为待上架</button>';
+          }
+          
+          // 设置状态文本
+          let statusText = '未知';
+          switch (passenger.status) {
+            case 0: statusText = '待上架'; break;
+            case 1: statusText = '已上架'; break;
+            case 2: statusText = '已下架'; break;
+          }
+          
+          tr.innerHTML = `
+            <td>${passenger.id}</td>
+            <td>${passenger.title}</td>
+            <td>${passenger.departureLocation}</td>
+            <td>${passenger.destinationLocation}</td>
+            <td>${passenger.bookedCount}/${passenger.passengerCapacity}</td>
+            <td>¥${passenger.price}</td>
+            <td>${statusText}</td>
+            <td>
+              <button class="button button-default" data-id="${passenger.id}" data-action="edit">编辑</button>
+              <button class="button button-danger" data-id="${passenger.id}" data-action="delete">删除</button>
+              ${statusButtons}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        
+        // 添加按钮事件
+        addPassengerButtonEvents();
+      } catch (error) {
+        console.error('加载低空旅客服务数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 为低空旅客服务的按钮添加事件
+    function addPassengerButtonEvents() {
+      document.querySelectorAll('#passengers .table button').forEach(button => {
+        button.addEventListener('click', async function() {
+          const id = this.getAttribute('data-id');
+          const action = this.getAttribute('data-action');
+          
+          try {
+            if (action === 'edit') {
+              // 编辑操作
+              const passenger = await API.passengers.getById(id);
+              showEditPassengerForm(passenger.data || passenger);
+            } else if (action === 'delete') {
+              // 删除操作
+              if (confirm('确定要删除该低空旅客服务吗？')) {
+                await API.passengers.delete(id);
+                alert('删除成功！');
+                loadPassengersData();
+              }
+            } else if (action === 'updateStatus') {
+              // 状态更新操作
+              const status = this.getAttribute('data-status');
+              await API.passengers.updateStatus(id, status);
+              alert('状态更新成功！');
+              loadPassengersData();
+            }
+          } catch (error) {
+            console.error('操作失败:', error);
+            alert(`操作失败: ${error.message || '未知错误'}`);
+          }
+        });
+      });
+    }
+    
+    // 显示编辑低空旅客服务表单
+    function showEditPassengerForm(passenger) {
+      // 创建模态框
+      const modal = document.createElement('div');
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+      modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+      modal.style.display = 'flex';
+      modal.style.justifyContent = 'center';
+      modal.style.alignItems = 'center';
+      modal.style.zIndex = '1000';
+      
+      // 创建表单容器
+      const formContainer = document.createElement('div');
+      formContainer.style.backgroundColor = 'white';
+      formContainer.style.padding = '20px';
+      formContainer.style.borderRadius = '5px';
+      formContainer.style.width = '500px';
+      formContainer.style.maxWidth = '90%';
+      
+      // 表单标题
+      const title = document.createElement('h3');
+      title.textContent = '编辑低空旅客服务';
+      formContainer.appendChild(title);
+      
+      // 表单内容
+      formContainer.innerHTML += `
+        <form id="edit-passenger-form">
+          <div class="form-group">
+            <label for="edit-title">标题</label>
+            <input type="text" id="edit-title" class="form-control" value="${passenger.title}">
+          </div>
+          <div class="form-group">
+            <label for="edit-departure">出发地点</label>
+            <input type="text" id="edit-departure" class="form-control" value="${passenger.departureLocation}">
+          </div>
+          <div class="form-group">
+            <label for="edit-destination">目的地点</label>
+            <input type="text" id="edit-destination" class="form-control" value="${passenger.destinationLocation}">
+          </div>
+          <div class="form-group">
+            <label for="edit-capacity">乘客容量</label>
+            <input type="number" id="edit-capacity" class="form-control" value="${passenger.passengerCapacity}">
+          </div>
+          <div class="form-group">
+            <label for="edit-price">价格</label>
+            <input type="number" id="edit-price" class="form-control" value="${passenger.price}">
+          </div>
+          <div class="form-group">
+            <label for="edit-status">状态</label>
+            <select id="edit-status" class="form-control">
+              <option value="0" ${passenger.status === 0 ? 'selected' : ''}>待上架</option>
+              <option value="1" ${passenger.status === 1 ? 'selected' : ''}>已上架</option>
+              <option value="2" ${passenger.status === 2 ? 'selected' : ''}>已下架</option>
+            </select>
+          </div>
+          <div style="margin-top: 20px; text-align: right;">
+            <button type="button" id="cancel-edit" class="button button-default" style="margin-right: 10px;">取消</button>
+            <button type="button" id="save-edit" class="button">保存</button>
+          </div>
+        </form>
+      `;
+      
+      // 添加表单容器到模态框
+      modal.appendChild(formContainer);
+      
+      // 添加模态框到页面
+      document.body.appendChild(modal);
+      
+      // 取消按钮事件
+      document.getElementById('cancel-edit').addEventListener('click', function() {
+        document.body.removeChild(modal);
+      });
+      
+      // 保存按钮事件
+      document.getElementById('save-edit').addEventListener('click', async function() {
+        try {
+          const updatedPassenger = {
+            id: passenger.id,
+            title: document.getElementById('edit-title').value,
+            departureLocation: document.getElementById('edit-departure').value,
+            destinationLocation: document.getElementById('edit-destination').value,
+            passengerCapacity: parseInt(document.getElementById('edit-capacity').value),
+            price: parseFloat(document.getElementById('edit-price').value),
+            status: parseInt(document.getElementById('edit-status').value)
+          };
+          
+          await API.passengers.update(passenger.id, updatedPassenger);
+          alert('更新成功！');
+          document.body.removeChild(modal);
+          loadPassengersData();
+        } catch (error) {
+          console.error('保存失败:', error);
+          alert(`保存失败: ${error.message || '未知错误'}`);
+        }
+      });
+    }
+    
+    // 加载商品数据
+    async function loadProductsData() {
+      try {
+        // 从API获取数据
+        const response = await API.products.getAll({page: 1, size: 10});
+        const data = response.data || response;
+        
+        // 清空表格
+        const tbody = document.querySelector('#products .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充数据
+        data.records.forEach(product => {
+          const tr = document.createElement('tr');
+          
+          // 设置状态文本
+          let statusText = '未知';
+          let statusButton = '';
+          
+          switch (product.status) {
+            case 0: 
+              statusText = '待上架'; 
+              statusButton = '<button class="button" data-id="'+product.id+'" data-action="updateStatus" data-status="1">上架</button>';
+              break;
+            case 1: 
+              statusText = '在售'; 
+              statusButton = '<button class="button button-default" data-id="'+product.id+'" data-action="updateStatus" data-status="2">下架</button>';
+              break;
+            case 2: 
+              statusText = '已下架'; 
+              statusButton = '<button class="button" data-id="'+product.id+'" data-action="updateStatus" data-status="0">设为待上架</button>';
+              break;
+          }
+          
+          tr.innerHTML = `
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.category}</td>
+            <td>¥${product.price}</td>
+            <td>${product.stock}</td>
+            <td>${product.sales}</td>
+            <td>${statusText}</td>
+            <td>
+              <button class="button button-default" data-id="${product.id}" data-action="edit">编辑</button>
+              <button class="button button-danger" data-id="${product.id}" data-action="delete">删除</button>
+              ${statusButton}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        
+        // 添加按钮事件
+        document.querySelectorAll('#products .table button').forEach(button => {
+          button.addEventListener('click', async function() {
+            const id = this.getAttribute('data-id');
+            const action = this.getAttribute('data-action');
+            
+            try {
+              if (action === 'edit') {
+                const product = await API.products.getById(id);
+                alert(`编辑商品 ID: ${id} (功能开发中)`);
+              } else if (action === 'delete') {
+                if (confirm('确定要删除该商品吗？')) {
+                  await API.products.delete(id);
+                  alert('删除成功！');
+                  loadProductsData();
+                }
+              } else if (action === 'updateStatus') {
+                const status = this.getAttribute('data-status');
+                await API.products.updateStatus(id, status);
+                alert('状态更新成功！');
+                loadProductsData();
+              }
+            } catch (error) {
+              console.error('操作失败:', error);
+              alert(`操作失败: ${error.message || '未知错误'}`);
+            }
+          });
+        });
+      } catch (error) {
+        console.error('加载商品数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 加载用户数据
+    async function loadUsersData() {
+      try {
+        // 从API获取数据
+        const response = await API.users.getAll({page: 1, size: 10});
+        const data = response.data || response;
+        
+        // 清空表格
+        const tbody = document.querySelector('#users .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充数据
+        data.records.forEach(user => {
+          const tr = document.createElement('tr');
+          
+          // 设置状态文本
+          let statusText = '未知';
+          switch (user.status) {
+            case 1: statusText = '正常'; break;
+            case 0: statusText = '禁用'; break;
+          }
+          
+          tr.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.phone}</td>
+            <td>${user.registerTime}</td>
+            <td>${user.lastLoginTime}</td>
+            <td>${statusText}</td>
+            <td>
+              <button class="button button-default" data-id="${user.id}" data-action="view">查看详情</button>
+              <button class="button button-danger" data-id="${user.id}" data-action="toggle">${user.status === 1 ? '禁用' : '启用'}</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        
+        // 添加按钮事件
+        document.querySelectorAll('#users .table button').forEach(button => {
+          button.addEventListener('click', async function() {
+            const id = this.getAttribute('data-id');
+            const action = this.getAttribute('data-action');
+            
+            try {
+              if (action === 'view') {
+                alert(`查看用户 ID: ${id} (功能开发中)`);
+              } else if (action === 'toggle') {
+                const newStatus = this.textContent === '禁用' ? 0 : 1;
+                await API.users.updateStatus(id, newStatus);
+                alert(`用户状态已${newStatus === 1 ? '启用' : '禁用'}`);
+                loadUsersData();
+              }
+            } catch (error) {
+              console.error('操作失败:', error);
+              alert(`操作失败: ${error.message || '未知错误'}`);
+            }
+          });
+        });
+      } catch (error) {
+        console.error('加载用户数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 加载订单数据
+    async function loadOrdersData() {
+      try {
+        // 从API获取数据
+        const response = await API.orders.getAll({page: 1, size: 10});
+        const data = response.data || response;
+        
+        // 清空表格
+        const tbody = document.querySelector('#orders .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充数据
+        data.records.forEach(order => {
+          const tr = document.createElement('tr');
+          
+          // 设置状态文本
+          let statusText = '未知';
+          let actionButton = '';
+          
+          switch (order.status) {
+            case 0: 
+              statusText = '待支付';
+              break;
+            case 1: 
+              statusText = '待发货';
+              actionButton = '<button class="button" data-id="'+order.id+'" data-action="ship">发货</button>';
+              break;
+            case 2: 
+              statusText = '已支付';
+              actionButton = '<button class="button" data-id="'+order.id+'" data-action="complete">确认完成</button>';
+              break;
+            case 3: 
+              statusText = '已完成';
+              break;
+            case 4: 
+              statusText = '已取消';
+              break;
+          }
+          
+          tr.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.username}</td>
+            <td>${order.productName}</td>
+            <td>¥${order.amount}</td>
+            <td>${order.payMethod}</td>
+            <td>${statusText}</td>
+            <td>${order.createTime}</td>
+            <td>
+              <button class="button button-default" data-id="${order.id}" data-action="view">查看详情</button>
+              ${actionButton}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        
+        // 添加按钮事件
+        document.querySelectorAll('#orders .table button').forEach(button => {
+          button.addEventListener('click', async function() {
+            const id = this.getAttribute('data-id');
+            const action = this.getAttribute('data-action');
+            
+            try {
+              if (action === 'view') {
+                alert(`查看订单 ID: ${id} (功能开发中)`);
+              } else if (action === 'ship') {
+                await API.orders.updateStatus(id, 2);
+                alert('订单已发货！');
+                loadOrdersData();
+              } else if (action === 'complete') {
+                await API.orders.updateStatus(id, 3);
+                alert('订单已完成！');
+                loadOrdersData();
+              }
+            } catch (error) {
+              console.error('操作失败:', error);
+              alert(`操作失败: ${error.message || '未知错误'}`);
+            }
+          });
+        });
+      } catch (error) {
+        console.error('加载订单数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 加载系统设置数据
+    async function loadSettingsData() {
+      try {
+        // 从API获取数据
+        const response = await API.settings.get();
+        const data = response.data || response;
+        
+        // 填充表单
+        document.getElementById('site-name').value = data.siteName;
+        document.getElementById('site-description').value = data.siteDescription;
+        document.getElementById('contact-email').value = data.contactEmail;
+        document.getElementById('contact-phone').value = data.contactPhone;
+      } catch (error) {
+        console.error('加载系统设置数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 设置按钮事件
+    function setupButtonEvents() {
+      // 添加低空旅客服务按钮
+      document.getElementById('add-passenger').addEventListener('click', function() {
+        showAddPassengerForm();
+      });
+      
+      // 添加商品按钮
+      document.getElementById('add-product').addEventListener('click', function() {
+        alert('添加商品功能正在开发中...');
+      });
+      
+      // 添加招聘信息按钮
+      document.getElementById('add-job').addEventListener('click', function() {
+        alert('添加招聘信息功能正在开发中...');
+      });
+      
+      // 添加运输任务按钮
+      document.getElementById('add-transport').addEventListener('click', function() {
+        alert('添加运输任务功能正在开发中...');
+      });
+      
+      // 添加培训课程按钮
+      document.getElementById('add-training').addEventListener('click', function() {
+        alert('添加培训课程功能正在开发中...');
+      });
+      
+      // 保存设置按钮
+      document.getElementById('save-settings').addEventListener('click', async function() {
+        try {
+          const settings = {
+            siteName: document.getElementById('site-name').value,
+            siteDescription: document.getElementById('site-description').value,
+            contactEmail: document.getElementById('contact-email').value,
+            contactPhone: document.getElementById('contact-phone').value
+          };
+          
+          await API.settings.update(settings);
+          alert('设置已保存！');
+        } catch (error) {
+          console.error('保存设置失败:', error);
+          alert(`保存设置失败: ${error.message || '未知错误'}`);
+        }
+      });
+    }
+    
+    // 显示添加低空旅客服务表单
+    function showAddPassengerForm() {
+      // 创建模态框
+      const modal = document.createElement('div');
+      modal.style.position = 'fixed';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+      modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+      modal.style.display = 'flex';
+      modal.style.justifyContent = 'center';
+      modal.style.alignItems = 'center';
+      modal.style.zIndex = '1000';
+      
+      // 创建表单容器
+      const formContainer = document.createElement('div');
+      formContainer.style.backgroundColor = 'white';
+      formContainer.style.padding = '20px';
+      formContainer.style.borderRadius = '5px';
+      formContainer.style.width = '500px';
+      formContainer.style.maxWidth = '90%';
+      
+      // 表单标题
+      const title = document.createElement('h3');
+      title.textContent = '添加低空旅客服务';
+      formContainer.appendChild(title);
+      
+      // 表单内容
+      formContainer.innerHTML += `
+        <form id="add-passenger-form">
+          <div class="form-group">
+            <label for="add-title">标题</label>
+            <input type="text" id="add-title" class="form-control" placeholder="请输入标题">
+          </div>
+          <div class="form-group">
+            <label for="add-departure">出发地点</label>
+            <input type="text" id="add-departure" class="form-control" placeholder="请输入出发地点">
+          </div>
+          <div class="form-group">
+            <label for="add-destination">目的地点</label>
+            <input type="text" id="add-destination" class="form-control" placeholder="请输入目的地点">
+          </div>
+          <div class="form-group">
+            <label for="add-capacity">乘客容量</label>
+            <input type="number" id="add-capacity" class="form-control" value="4">
+          </div>
+          <div class="form-group">
+            <label for="add-price">价格</label>
+            <input type="number" id="add-price" class="form-control" value="599">
+          </div>
+          <div class="form-group">
+            <label for="add-status">状态</label>
+            <select id="add-status" class="form-control">
+              <option value="0" selected>待上架</option>
+              <option value="1">已上架</option>
+              <option value="2">已下架</option>
+            </select>
+          </div>
+          <div style="margin-top: 20px; text-align: right;">
+            <button type="button" id="cancel-add" class="button button-default" style="margin-right: 10px;">取消</button>
+            <button type="button" id="save-add" class="button">保存</button>
+          </div>
+        </form>
+      `;
+      
+      // 添加表单容器到模态框
+      modal.appendChild(formContainer);
+      
+      // 添加模态框到页面
+      document.body.appendChild(modal);
+      
+      // 取消按钮事件
+      document.getElementById('cancel-add').addEventListener('click', function() {
+        document.body.removeChild(modal);
+      });
+      
+      // 保存按钮事件
+      document.getElementById('save-add').addEventListener('click', async function() {
+        try {
+          const newPassenger = {
+            title: document.getElementById('add-title').value,
+            departureLocation: document.getElementById('add-departure').value,
+            destinationLocation: document.getElementById('add-destination').value,
+            passengerCapacity: parseInt(document.getElementById('add-capacity').value),
+            price: parseFloat(document.getElementById('add-price').value),
+            status: parseInt(document.getElementById('add-status').value),
+            bookedCount: 0
+          };
+          
+          // 验证必填字段
+          if (!newPassenger.title) {
+            alert('请输入标题');
+            return;
+          }
+          if (!newPassenger.departureLocation) {
+            alert('请输入出发地点');
+            return;
+          }
+          if (!newPassenger.destinationLocation) {
+            alert('请输入目的地点');
+            return;
+          }
+          
+          await API.passengers.create(newPassenger);
+          alert('添加成功！');
+          document.body.removeChild(modal);
+          loadPassengersData();
+        } catch (error) {
+          console.error('保存失败:', error);
+          alert(`保存失败: ${error.message || '未知错误'}`);
+        }
+      });
+    }
+    
+    // 加载招聘管理数据
+    async function loadRecruitmentData() {
+      try {
+        // 使用静态数据替代API调用
+        const data = {
+          records: [
+            {id: 1, title: '无人机飞行员', department: '运营部', location: '北京', salary: '8000-12000', publishDate: '2023-07-15', status: 1},
+            {id: 2, title: '无人机维修工程师', department: '技术部', location: '上海', salary: '10000-15000', publishDate: '2023-07-20', status: 1},
+            {id: 3, title: '市场推广专员', department: '市场部', location: '广州', salary: '7000-10000', publishDate: '2023-08-01', status: 1}
+          ]
+        };
+        
+        // 清空表格
+        const tbody = document.querySelector('#recruitment .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充数据
+        data.records.forEach(job => {
+          const tr = document.createElement('tr');
+          
+          // 设置状态文本和按钮
+          let statusText = job.status === 1 ? '招聘中' : '已结束';
+          let statusButton = job.status === 1 ? 
+            '<button class="button button-default" data-id="'+job.id+'" data-action="updateStatus">结束招聘</button>' : 
+            '<button class="button" data-id="'+job.id+'" data-action="updateStatus">重新招聘</button>';
+          
+          tr.innerHTML = `
+            <td>${job.id}</td>
+            <td>${job.title}</td>
+            <td>${job.department}</td>
+            <td>${job.location}</td>
+            <td>${job.salary}</td>
+            <td>${job.publishDate}</td>
+            <td>${statusText}</td>
+            <td>
+              <button class="button button-default" data-id="${job.id}" data-action="edit">编辑</button>
+              <button class="button button-danger" data-id="${job.id}" data-action="delete">删除</button>
+              ${statusButton}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        
+        // 添加按钮事件
+        document.querySelectorAll('#recruitment .table button').forEach(button => {
+          button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const action = this.getAttribute('data-action');
+            alert(`${action} 招聘信息 ID: ${id} (功能开发中)`);
+          });
+        });
+      } catch (error) {
+        console.error('加载招聘管理数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 加载运输管理数据
+    async function loadTransportData() {
+      try {
+        // 使用静态数据替代API调用
+        const data = {
+          records: [
+            {id: 1, taskNo: 'T20230801001', cargoType: '医疗物资', origin: '北京市朝阳区医疗中心', destination: '北京市海淀区医院', weight: 5.2, estimatedDeliveryTime: '2023-08-01 14:30', status: 2},
+            {id: 2, taskNo: 'T20230802001', cargoType: '快递包裹', origin: '北京市海淀区物流中心', destination: '北京市西城区社区', weight: 3.8, estimatedDeliveryTime: '2023-08-02 16:00', status: 1},
+            {id: 3, taskNo: 'T20230803001', cargoType: '农产品', origin: '北京市昌平区农场', destination: '北京市朝阳区超市', weight: 8.5, estimatedDeliveryTime: '2023-08-03 09:00', status: 0}
+          ]
+        };
+        
+        // 清空表格
+        const tbody = document.querySelector('#transport .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充数据
+        data.records.forEach(task => {
+          const tr = document.createElement('tr');
+          
+          // 设置状态文本和按钮
+          let statusText = '';
+          let actionButtons = '';
+          
+          switch(task.status) {
+            case 0: // 待起飞
+              statusText = '待起飞';
+              actionButtons = `
+                <button class="button button-default" data-id="${task.id}" data-action="view">查看详情</button>
+                <button class="button" data-id="${task.id}" data-action="start">开始运输</button>
+                <button class="button button-danger" data-id="${task.id}" data-action="cancel">取消任务</button>
+              `;
+              break;
+            case 1: // 运输中
+              statusText = '运输中';
+              actionButtons = `
+                <button class="button button-default" data-id="${task.id}" data-action="view">查看详情</button>
+                <button class="button" data-id="${task.id}" data-action="complete">标记完成</button>
+              `;
+              break;
+            case 2: // 已完成
+              statusText = '已完成';
+              actionButtons = `
+                <button class="button button-default" data-id="${task.id}" data-action="view">查看详情</button>
+              `;
+              break;
+            case 3: // 已取消
+              statusText = '已取消';
+              actionButtons = `
+                <button class="button button-default" data-id="${task.id}" data-action="view">查看详情</button>
+              `;
+              break;
+          }
+          
+          tr.innerHTML = `
+            <td>${task.id}</td>
+            <td>${task.taskNo}</td>
+            <td>${task.cargoType}</td>
+            <td>${task.origin}</td>
+            <td>${task.destination}</td>
+            <td>${task.weight}</td>
+            <td>${task.estimatedDeliveryTime}</td>
+            <td>${statusText}</td>
+            <td>${actionButtons}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+        
+        // 添加按钮事件
+        document.querySelectorAll('#transport .table button').forEach(button => {
+          button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const action = this.getAttribute('data-action');
+            alert(`${action} 运输任务 ID: ${id} (功能开发中)`);
+          });
+        });
+      } catch (error) {
+        console.error('加载运输管理数据失败:', error);
+        throw error;
+      }
+    }
+    
+    // 加载培训管理数据
+    async function loadTrainingData() {
+      try {
+        // 使用静态数据替代API调用
+        const data = {
+          records: [
+            {id: 1, title: '无人机基础飞行培训', type: '初级培训', location: '北京市海淀区培训中心', startDate: '2023-08-10', endDate: '2023-08-15', price: 1999, enrolledCount: 8, capacity: 20, status: 1},
+            {id: 2, title: '无人机航拍技术进阶', type: '中级培训', location: '上海市浦东新区培训基地', startDate: '2023-08-20', endDate: '2023-08-25', price: 2999, enrolledCount: 5, capacity: 15, status: 1},
+            {id: 3, title: '无人机竞速赛培训', type: '高级培训', location: '广州市天河区训练场', startDate: '2023-09-01', endDate: '2023-09-10', price: 3999, enrolledCount: 3, capacity: 10, status: 1}
+          ]
+        };
+        
+        // 清空表格
+        const tbody = document.querySelector('#training .table tbody');
+        tbody.innerHTML = '';
+        
+        // 填充数据
+        data.records.forEach(course => {
+          const tr = document.createElement('tr');
+          
+          // 设置状态文本和按钮
+          let statusText = '';
+          let statusButton = '';
+          
+          switch(course.status) {
+            case 1: // 报名中
+              statusText = '报名中';
+              statusButton = '<button class="button button-default" data-id="'+course.id+'" data-action="updateStatus">结束报名</button>';
+              break;
+            case 2: // 培训中
+              statusText = '培训中';
+              statusButton = '<button class="button button-default" data-id="'+course.id+'" data-action="updateStatus">结束培训</button>';
+              break;
+            case 3: // 已结束
+              statusText = '已结束';
+              statusButton = '';
+              break;
+          }
+          
+          tr.innerHTML = `
+            <td>${course.id}</td>
+            <td>${course.title}</td>
+            <td>${course.type}</td>
+            <td>${course.location}</td>
+            <td>${course.startDate}</td>
+            <td>${course.endDate}</td>
+            <td>¥${course.price}</td>
+            <td>${course.enrolledCount}/${course.capacity}</td>
+            <td>${statusText}</td>
+            <td>
+              <button class="button button-default" data-id="${course.id}" data-action="edit">编辑</button>
+              <button class="button button-danger" data-id="${course.id}" data-action="delete">删除</button>
+              ${statusButton}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        
+        // 添加按钮事件
+        document.querySelectorAll('#training .table button').forEach(button => {
+          button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const action = this.getAttribute('data-action');
+            alert(`${action} 培训课程 ID: ${id} (功能开发中)`);
+          });
+        });
+      } catch (error) {
+        console.error('加载培训管理数据失败:', error);
+        throw error;
+      }
+    }
+  </script>
+</body>
+</html> 

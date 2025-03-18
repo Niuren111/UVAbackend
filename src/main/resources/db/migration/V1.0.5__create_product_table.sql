@@ -1,0 +1,25 @@
+-- 创建商品表
+CREATE TABLE IF NOT EXISTS `product` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `name` varchar(100) NOT NULL COMMENT '商品名称',
+    `description` text COMMENT '商品描述',
+    `price` decimal(10,2) NOT NULL COMMENT '商品价格',
+    `stock` int(11) NOT NULL COMMENT '库存数量',
+    `category` varchar(50) NOT NULL COMMENT '商品分类',
+    `brand` varchar(50) NOT NULL COMMENT '品牌',
+    `model` varchar(50) NOT NULL COMMENT '型号',
+    `images` text COMMENT '商品图片，多个图片URL以逗号分隔',
+    `specifications` text COMMENT '规格参数',
+    `parameters` text COMMENT '技术参数',
+    `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态：0-待上架，1-已上架，2-已下架',
+    `user_id` bigint(20) NOT NULL COMMENT '创建者ID',
+    `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `is_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除：0-未删除，1-已删除',
+    PRIMARY KEY (`id`),
+    KEY `idx_category` (`category`),
+    KEY `idx_brand` (`brand`),
+    KEY `idx_status` (`status`),
+    KEY `idx_user_id` (`user_id`),
+    KEY `idx_create_time` (`create_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品表'; 
